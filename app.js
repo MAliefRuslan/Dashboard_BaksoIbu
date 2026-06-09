@@ -218,10 +218,12 @@ function updateKPIs() {
     const revenue = sumField(data, 'total sales amount');
     const orders  = sumField(data, 'total sales order');
     const qty     = sumField(data, 'sold qty');
+    const avgNominal = orders > 0 ? (revenue / orders) : 0;
 
     document.getElementById('kpiRevenue').textContent = formatCurrency(revenue);
     document.getElementById('kpiOrders').textContent  = formatNumber(orders);
     document.getElementById('kpiQty').textContent     = formatNumber(qty);
+    document.getElementById('kpiAvgNominal').textContent = formatCurrency(avgNominal);
 }
 
 // ─── Chart: Trend ───────────────────────────────────────────
