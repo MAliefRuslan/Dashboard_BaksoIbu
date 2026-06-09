@@ -218,12 +218,10 @@ function updateKPIs() {
     const revenue = sumField(data, 'total sales amount');
     const orders  = sumField(data, 'total sales order');
     const qty     = sumField(data, 'sold qty');
-    const profit  = sumField(data, 'profit');
 
     document.getElementById('kpiRevenue').textContent = formatCurrency(revenue);
     document.getElementById('kpiOrders').textContent  = formatNumber(orders);
     document.getElementById('kpiQty').textContent     = formatNumber(qty);
-    document.getElementById('kpiProfit').textContent  = formatCurrency(profit);
 }
 
 // ─── Chart: Trend ───────────────────────────────────────────
@@ -767,12 +765,11 @@ function updateProductTable(searchTerm = '') {
     data.forEach(d => {
         const key = d.product;
         if (!productMap[key]) {
-            productMap[key] = { product: d.product, group: d.group, qty: 0, revenue: 0, orders: 0, profit: 0 };
+            productMap[key] = { product: d.product, group: d.group, qty: 0, revenue: 0, orders: 0 };
         }
         productMap[key].qty     += d['sold qty'];
         productMap[key].revenue += d['total sales amount'];
         productMap[key].orders  += d['total sales order'];
-        productMap[key].profit  += d['profit'];
     });
 
     let rows = Object.values(productMap);
@@ -806,7 +803,6 @@ function updateProductTable(searchTerm = '') {
             <td>${formatCurrency(r.revenue)}</td>
             <td>${formatNumber(r.orders)}</td>
             <td>${r.avg.toFixed(2)}</td>
-            <td>${formatCurrency(r.profit)}</td>
         `;
         tbody.appendChild(row);
     });
